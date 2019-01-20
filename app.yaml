@@ -12,6 +12,10 @@ automatic_scaling:
   max_concurrent_requests: 80
 
 handlers:
+- url: /admin/.*
+  secure: always
+  login: admin
+  script: auto
 - url: /.*
   secure: always
   script: auto

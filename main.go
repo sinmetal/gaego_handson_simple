@@ -9,6 +9,7 @@ import (
 
 func main() {
 	http.HandleFunc("/api/helloworld", backend.HelloWorldHandler)
+	http.HandleFunc("/admin/appengine-env", backend.AppEngineEnvHandler)
 
 	appengine.Main()
 }
