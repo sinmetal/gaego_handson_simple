@@ -12,6 +12,13 @@ automatic_scaling:
   max_concurrent_requests: 80
 
 handlers:
+- url: /
+  secure: always
+  static_files: static/index.html
+  upload: static/index.html
+- url: /static
+  secure: always
+  static_dir: static
 - url: /admin/.*
   secure: always
   login: admin
