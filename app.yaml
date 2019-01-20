@@ -16,6 +16,10 @@ handlers:
   secure: always
   static_files: static/index.html
   upload: static/index.html
+- url: /new-version
+  secure: always
+  static_files: static/new-version.html
+  upload: static/new-version.html
 - url: /static
   secure: always
   static_dir: static
