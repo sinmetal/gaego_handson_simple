@@ -17,6 +17,7 @@ func HelloWorldHandler(w http.ResponseWriter, r *http.Request) {
 		Message: "Hello Google App Engine Standard Go",
 		Time:    time.Now(),
 	}
+	log.Infof(r.Context(), "%+v\n", res)
 
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
