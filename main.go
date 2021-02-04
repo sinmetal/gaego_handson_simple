@@ -9,8 +9,25 @@ import (
 
 	"cloud.google.com/go/compute/metadata"
 	"cloud.google.com/go/datastore"
+	"cloud.google.com/go/profiler"
 	"github.com/sinmetal/gaego_handson_simple/backend"
 )
+
+func startProfiler(projectID string) error {
+	cfg := profiler.Config{
+		ProjectID:      projectID,
+		Service:        "gaego_handson_simple",
+		ServiceVersion: "0.0.1",
+
+		// For OpenCensus users:
+		// To see Profiler agent spans in APM backend,
+		// set EnableOCTelemetry to true
+		// EnableOCTelemetry: true,
+	}
+
+	// Profiler initialization, best done as early as possible.
+	return profiler.Start(cfg)
+}
 
 func main() {
 	ctx := context.Background()
@@ -25,6 +42,9 @@ func main() {
 	if metadata.OnGCE() {
 		projectID, err = metadata.ProjectID()
 		if err != nil {
+			log.Fatal(err)
+		}
+		if err := startProfiler(projectID); err != nil {
 			log.Fatal(err)
 		}
 	}
